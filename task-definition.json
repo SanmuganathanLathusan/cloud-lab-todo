@@ -1,0 +1,30 @@
+{
+  "family":"todo-task-cli",
+  "networkMode":"awsvpc",
+  "requiresCompatibilities":["FARGATE"],
+  "cpu":"256",
+  "memory":"512",
+  "executionRoleArn":"arn:aws:iam::100731996287:role/ecs-task-execution-role-cli",
+  "containerDefinitions":[
+    {
+      "name":"todo-container",
+      "image":"100731996287.dkr.ecr.ap-south-1.amazonaws.com/cloud-lab-todo:latest",
+      "essential":true,
+      "portMappings":[
+        {
+          "containerPort":3000,
+          "hostPort":3000,
+          "protocol":"tcp"
+        }
+      ],
+      "logConfiguration":{
+        "logDriver":"awslogs",
+        "options":{
+          "awslogs-group":"/ecs/todo-task-cli",
+          "awslogs-region":"ap-south-1",
+          "awslogs-stream-prefix":"ecs"
+        }
+      }
+    }
+  ]
+}
